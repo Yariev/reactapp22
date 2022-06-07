@@ -1,26 +1,25 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./Sass/Style.scss";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Planten } from "./Pages/Planten";
+import { IetsAnders } from "./Pages/IetsAnders";
+import { PlantToevoegen } from "./Pages/PlantToevoegen";
+import { MenuContainer } from "./Navbar/Navbar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <MenuContainer />
+        <div className="container content-container">
+          <Routes>
+            <Route path="/" element={<Planten />} />
+            <Route path="/Planten" element={<Planten />} />
+            <Route path="/Plant-toevoegen" element={<PlantToevoegen />} />
+            <Route path="/Iets-anders" element={<IetsAnders />} />
+          </Routes>
+        </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
