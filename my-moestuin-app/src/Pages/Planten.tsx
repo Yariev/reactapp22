@@ -34,7 +34,7 @@ export const Planten = () => {
         setLoading(false);
       });
   }, []);
-  console.log("data", planten, fetchingError, isLoading);
+  //console.log("data", planten, fetchingError, isLoading);
 
   return (
     <>
@@ -47,7 +47,6 @@ export const Planten = () => {
         planten.map((plant, index) => {
           return (
             <div key={index}>
-              {" "}
               {plant.id} {plant.naam_kort} {plant.naam_lang}
             </div>
           );

@@ -4,9 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var plantenRouter = require("./routes/planten");
-var plantRouter = require("./routes/plant");
+// var indexRouter = require("./routes/index");
+var getPlanten = require("./routes/planten");
+var addPlant = require("./routes/plant");
 
 var app = express();
 
@@ -20,9 +20,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/planten", plantenRouter);
-app.use("/plant", plantRouter);
+// app.get("/", indexRouter);
+// app.use("/planten", plantenRouter);
+// app.use("/plant", plantRouter);
+
+// app.get("/", (req, res) => {  // CHECK: FE index gaat naar planten.tsx, oke?
+//   //res.send("root");
+//   getPlanten(req, res);
+// });
+
+app.get("/planten", (req, res) => {
+  getPlanten(req, res);
+});
+
+app.post("/plant", (req, res) => {
+  addPlant(req, res);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

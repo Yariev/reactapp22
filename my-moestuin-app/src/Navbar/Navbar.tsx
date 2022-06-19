@@ -21,8 +21,8 @@ export const NavbarContainer = () => (
           <Nav.Link as={Link} to={RouteEnum.PLANTEN}>
             Planten
           </Nav.Link>
-          <Nav.Link as={Link} to={RouteEnum.PLANT_PROFILE}>
-            Plant
+          <Nav.Link as={Link} to={RouteEnum.NIEUWEPLANT}>
+            Plant toevoegen
           </Nav.Link>
           <Nav.Link as={Link} to={RouteEnum.IETSANDERS}>
             Iets anders

@@ -1,12 +1,29 @@
-var express = require("express");
-var router = express.Router();
+const fs = require("fs");
+const moestuinFileLocation = "../moestuin_file/planten.json";
+const fileName = moestuinFileLocation;
+const file = require(fileName);
 
-const data = require("../moestuin_file/planten.json");
+let plants = require(moestuinFileLocation);
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.header("Content-Type", "application/json");
-  res.send(JSON.stringify(data)); //todo fs.writeFile ipv read
-});
+// Post nieuwe plant op '/plant'
+const addPlant = (req, res) => {
+  const maxRecordId = Math.max(...plants.map((obj) => parseInt(obj.id)));
 
-module.exports = router;
+  const newPlant = {
+    id: (maxRecordId + 1).toString(),
+    naam_kort: req.body.naam_kort,
+    naam_lang: req.body.naam_lang,
+  };
+
+  plants.push(newPlant);
+
+  fs.writeFile(__dirname + "/" + moestuinFileLocation, JSON.stringify(plants), function writeJSON(err) {
+    if (err) return console.log(err);
+    console.log(JSON.stringify(file));
+    console.log("writing to " + __dirname + "/" + moestuinFileLocation);
+  });
+
+  res.send("received plant" + JSON.stringify(newPlant));
+};
+
+module.exports = addPlant;

@@ -16,10 +16,11 @@ export default class App extends React.Component {
           <Routes>
             <Route path={RouteEnum.HOME} element={<Planten />} />
             <Route path={RouteEnum.PLANTEN} element={<Planten />} />
-            <Route
+            <Route path={RouteEnum.NIEUWEPLANT} element={<PlantToevoegen />} />
+            {/* <Route
               path={RouteEnum.PLANT_PROFILE}
               element={<PlantToevoegen />}
-            />
+            /> */}
             <Route path={RouteEnum.IETSANDERS} element={<IetsAnders />} />
           </Routes>
         </div>
