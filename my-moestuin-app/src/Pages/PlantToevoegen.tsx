@@ -2,6 +2,8 @@ import React from "react";
 import { RouteEnum } from "../Enums/routes-enum";
 
 export const PlantToevoegen = () => {
+  const [plantSubmitted, setPlantSubmitted] = React.useState<boolean>(false);
+
   const newPlant = {
     naam_kort: "nieuwe FE plantnaam kort",
     naam_lang: "nieuwe FE plantnaam lang",
@@ -11,7 +13,6 @@ export const PlantToevoegen = () => {
   // data.append( "json", JSON.stringify( newPlant ) );
 
   const postPlant = () => {
-    console.log("test clicl");
     fetch(RouteEnum.NIEUWEPLANT, {
       headers: {
         Accept: "application/json",
@@ -19,6 +20,9 @@ export const PlantToevoegen = () => {
       },
       method: "post",
       body: JSON.stringify(newPlant),
+    }).then((res: Response) => {
+      console.log("response", res);
+      setPlantSubmitted(true);
     });
   };
 
@@ -28,6 +32,7 @@ export const PlantToevoegen = () => {
       <p>voor plant bekijken: /planten/:plantId/ ??? </p>
 
       <button onClick={() => postPlant()}>Plant toevoegen</button>
+      {plantSubmitted && plantSubmitted && <div> plant is succesvol toegevoegd.</div>}
     </>
   );
 };

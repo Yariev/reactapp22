@@ -23,7 +23,7 @@ const addPlant = (req, res) => {
     console.log("writing to " + __dirname + "/" + moestuinFileLocation);
   });
 
-  res.send("received plant" + JSON.stringify(newPlant));
+  res.send("received plant" + newPlant.id);
 };
 
 module.exports = addPlant;

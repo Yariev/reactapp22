@@ -1,1 +1,5 @@
-[{"id":"1","naam_kort":"Tomaat","naam_lang":"Tomaat Vlees"},{"id":"2","naam_kort":"Druif","naam_lang":"Druif Rood"},{"id":"3","naam_kort":"Bes","naam_lang":"Rode Bes"},{"id":"4","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"4","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"5","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"6","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"8","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"9","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"10","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"11","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"},{"id":"12","naam_kort":"nieuwe FE plantnaam kort","naam_lang":"nieuwe FE plantnaam lang"}]
+[
+  { "id": "1", "naam_kort": "Tomaat", "naam_lang": "Tomaat Vlees" },
+  { "id": "2", "naam_kort": "Druif", "naam_lang": "Druif Rood" },
+  { "id": "3", "naam_kort": "Bes", "naam_lang": "Rode Bes" }
+]

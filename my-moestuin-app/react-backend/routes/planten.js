@@ -9,3 +9,4 @@ const Planten = (req, res) => {
 };
 
 module.exports = Planten;
+ 
