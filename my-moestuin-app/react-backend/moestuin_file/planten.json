@@ -1,5 +1,1 @@
-[
-  { "id": "1", "naam_kort": "Tomaat", "naam_lang": "Tomaat Vlees" },
-  { "id": "2", "naam_kort": "Druif", "naam_lang": "Druif Rood" },
-  { "id": "3", "naam_kort": "Bes", "naam_lang": "Rode Bes" }
-]
+[{"id":"1","naam_kort":"Tomaat","naam_lang":"Tomaat Vlees"},{"id":"2","naam_kort":"Druif","naam_lang":"Druif Rood"},{"id":"3","naam_kort":"Bes","naam_lang":"Rode Bes"},{"id":"4","naam_kort":"Kaukasische look","naam_lang":"Kaukasische look - zonder - look"}]
