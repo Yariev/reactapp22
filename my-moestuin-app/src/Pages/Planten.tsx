@@ -1,14 +1,9 @@
 import React from "react";
 import { RouteEnum } from "../Enums/routes-enum";
-
-interface IPlant {
-  id: number;
-  naam_kort: string;
-  naam_lang: string;
-}
+import { PlantFormFields } from "../interfaces/plant";
 
 export const Planten = () => {
-  const [planten, setPlanten] = React.useState<IPlant[]>([]);
+  const [planten, setPlanten] = React.useState<PlantFormFields[]>([]);
   const [fetchingError, setFetchingError] = React.useState<string | null>(null);
   const [isLoading, setLoading] = React.useState(false);
 
@@ -23,8 +18,8 @@ export const Planten = () => {
         setFetchingError("Something went wrong");
         // throw new Error("Something went wrong");
       })
-      .then((responseJson: IPlant[]) => {
-        console.log("fetch", responseJson);
+      .then((responseJson: PlantFormFields[]) => {
+        //console.log("fetch", responseJson);
         setPlanten(responseJson);
         setLoading(false);
       })
@@ -34,7 +29,37 @@ export const Planten = () => {
         setLoading(false);
       });
   }, []);
-  //console.log("data", planten, fetchingError, isLoading);
+
+  // console.log("data", planten, fetchingError, isLoading);
+  if (planten.length > 0) {
+    const plantenReduce: PlantFormFields =
+      //planten.reduce((obj, item) => {
+      //   return obj;
+      // });
+
+      planten.reduce(
+        (prevVal: PlantFormFields, currVal: PlantFormFields, currIndex: number, array: PlantFormFields[]) => {
+          console.log("prevVal", prevVal, "currVal", currVal, "currIndex", currIndex, "array", array);
+          return prevVal;
+        }
+      );
+    console.log("planten", plantenReduce);
+  }
+
+  // const groupBy = (inputArray: IPlant[], prop: keyof IPlant) => {
+  //   inputArray.reduce((prevVal: IPlant, currVal: IPlant) => {
+  //     console.log(prevVal, currVal);
+
+  //     let groupKey: keyof IPlant = currVal[prop];
+  //     if (!prevVal[groupKey]) {
+  //       prevVal[groupKey] = [];
+  //     }
+  //     prevVal[groupKey].push(currVal);
+  //     return prevVal;
+  //   }, {});
+  // };
+
+  // console.log("planten", groupBy(planten, "plant_familie"));
 
   return (
     <>
@@ -47,7 +72,7 @@ export const Planten = () => {
         planten.map((plant, index) => {
           return (
             <div key={index}>
-              {plant.id} {plant.naam_kort} {plant.naam_lang}
+              {plant.id} {plant.naam_kort} {plant.naam_lang} {plant.plantsoort}
             </div>
           );
         })}

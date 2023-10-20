@@ -1,64 +1,42 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { RouteEnum } from "../Enums/routes-enum";
+import { useForm, SubmitHandler, useFormContext } from "react-hook-form";
+import { InputField } from "../Components/Form/InputField";
+import { PlantSoortEnum, GroenteFamilieEnum, StandplaatsEnum } from "../Enums/plant-enum";
+import { PlantFormFields } from "../interfaces/plant";
+import { postPlant } from "../Service/plant-service";
 
-enum PlantFamilieEnum {
-  groente = "groente",
-  bloemen = "bloemen",
-  fruit = "fruit",
-  vastePlant = "vaste plant",
-}
-
-interface IFormInput {
-  naam_kort: string;
-  naam_lang: string;
-  plant_familie: PlantFamilieEnum;
-}
+export interface FormFields extends PlantFormFields {}
 
 export const PlantToevoegen = () => {
   const {
-    register,
     handleSubmit,
+    register,
     watch,
     setValue,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<FormFields>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log("form data", JSON.stringify(data));
-
-    return postPlant(data);
-  };
+  const watchPlantsoort = watch("plantsoort");
 
   const [plantSubmitted, setPlantSubmitted] = React.useState<boolean>(false);
 
-  // var data = new FormData();
-  // data.append( "json", JSON.stringify( newPlant ) );
-
-  const postPlant = (plantData: IFormInput) => {
-    fetch(RouteEnum.NIEUWEPLANT, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "post",
-      body: JSON.stringify(plantData),
-    }).then((res: Response) => {
-      console.log("response", res);
-      setPlantSubmitted(true);
-    });
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    console.log("form data", data, JSON.stringify(data));
+    return postPlant(data, setPlantSubmitted);
   };
 
   return (
     <>
       <h1>Plant toevoegen...</h1>
-      <p>voor plant bekijken: /planten/:plantId/ ??? </p>
+      {/* <p>voor plant bekijken: /planten/:plantId/ ??? </p> */}
 
       {/* <button onClick={() => postPlant()}>Plant toevoegen</button> */}
 
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
+      {/* register your input into the hook by invoking the "register" function */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
+        <InputField name="zaaiperiode" />
+
         <div className="form-group">
           <label htmlFor="korte_naam">Korte naam:</label>
           <input
@@ -82,14 +60,68 @@ export const PlantToevoegen = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="plant_familie">plant familie:</label>
-          <select className="form-control" id="plant_familie" {...register("plant_familie")}>
-            <option value={""}>Maak een keuze</option>
-            <option value={PlantFamilieEnum.bloemen}>{PlantFamilieEnum.bloemen}</option>
-            <option value={PlantFamilieEnum.fruit}>{PlantFamilieEnum.fruit}</option>
-            <option value={PlantFamilieEnum.groente}>{PlantFamilieEnum.groente}</option>
-            <option value={PlantFamilieEnum.vastePlant}>{PlantFamilieEnum.vastePlant}</option>
+          <label htmlFor="plantsoort">Plant familie:</label>
+          <select className="form-control" id="plantsoort" {...register("plantsoort")}>
+            <>
+              <option value={""}>Maak een keuze</option>
+              {Object.keys(PlantSoortEnum).map((plantSoort, index) => {
+                return (
+                  <option key={plantSoort + index} value={plantSoort}>
+                    {plantSoort}
+                  </option>
+                );
+              })}
+            </>
           </select>
+        </div>
+
+        {watchPlantsoort === PlantSoortEnum.groente && (
+          <div className="form-group">
+            <label htmlFor="groentefamilie">Groente familie:</label>
+            <select className="form-control" id="groentefamilie" {...register("groentefamilie")}>
+              <>
+                <option value={""}>Maak een keuze</option>
+                {Object.keys(GroenteFamilieEnum).map((groenteFamilie, index) => {
+                  return (
+                    <option key={groenteFamilie + index} value={groenteFamilie}>
+                      {groenteFamilie}
+                    </option>
+                  );
+                })}
+              </>
+            </select>
+          </div>
+        )}
+
+        <div className="form-group">
+          <label htmlFor="standplaats">Standplaats:</label>
+          <select className="form-control" id="standplaats" {...register("standplaats")}>
+            <>
+              <option value={""}>Maak een keuze</option>
+              {Object.keys(StandplaatsEnum).map((standplaats, index) => {
+                return (
+                  <option key={standplaats + index} value={standplaats}>
+                    {standplaats}
+                  </option>
+                );
+              })}
+            </>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="zaaiperiode">Zaaiperiode:</label>
+          <input className="form-control" id="zaaiperiode" {...register("zaaiperiode")} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="zaaiinstructie">Zaaiinstructie:</label>
+          <textarea cols={24} rows={5} className="form-control" id="zaaiinstructie" {...register("zaaiinstructie")} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="voeding">Voeding:</label>
+          <input className="form-control" id="voeding" {...register("voeding")} />
         </div>
 
         <button type="submit" className="btn btn-primary">

@@ -7,12 +7,13 @@ let plants = require(moestuinFileLocation);
 
 // Post nieuwe plant op '/plant'
 const addPlant = (req, res) => {
-  const maxRecordId = Math.max(...plants.map((obj) => parseInt(obj.id)));
+  const maxRecordId = plants.length > 0 ? Math.max(...plants.map((obj) => parseInt(obj.id))) : parseInt("0");
 
   const newPlant = {
     id: (maxRecordId + 1).toString(),
     naam_kort: req.body.naam_kort,
     naam_lang: req.body.naam_lang,
+    plant_familie: req.body.plant_familie,
   };
 
   plants.push(newPlant);
